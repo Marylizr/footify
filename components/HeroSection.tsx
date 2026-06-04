@@ -3,64 +3,92 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-// Each line of the headline renders as a separate stagger block
 const lines = ["The Ultimate", "Sneaker", "Customization", "Experience"];
 
 export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen min-h-[600px] bg-[#08080f] overflow-hidden"
+      className="relative w-full min-h-screen bg-[#08080f] overflow-hidden"
     >
-      {/* ── Sneaker: right 65%, fills full height, floats ── */}
-      <motion.div
-        animate={{ y: [0, -14, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute right-0 top-0 w-[65%] md:w-[60%] h-full pointer-events-none"
-      >
-        <Image
-          src="/images/hero-sneaker.png"
-          alt="Custom Jordan sneaker"
-          fill
-          className="object-contain object-right-bottom"
-          priority
-          sizes="65vw"
-        />
-      </motion.div>
+      {/* ═══ TRUE 50/50 GRID — text left, shoe right ═══ */}
+      <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2">
 
-      {/* ── Left-to-right gradient so text stays readable ── */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#08080f] via-[#08080f]/80 to-transparent pointer-events-none" />
-      {/* ── Bottom gradient ── */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#08080f]/60 via-transparent to-transparent pointer-events-none" />
+        {/* ── LEFT: headline + subheadline ───────────── */}
+        <div className="relative z-10 flex flex-col justify-between
+                        px-6 md:px-12 lg:px-16 xl:px-20
+                        pt-28 pb-10 min-h-screen lg:min-h-0">
+          {/* Staggered headline */}
+          <div className="flex flex-col mt-4">
+            {lines.map((line, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+                className="block font-black text-white leading-[0.95] tracking-tight
+                           text-[clamp(3.5rem,8vw,7.5rem)]"
+              >
+                {line}
+              </motion.span>
+            ))}
+          </div>
 
-      {/* ── Content ── */}
-      <div className="relative z-10 h-full flex flex-col justify-between px-6 md:px-14 lg:px-20 pt-28 pb-10">
-        {/* Headline — each line staggers in from the left */}
-        <div className="flex flex-col">
-          {lines.map((line, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.55, delay: i * 0.1, ease: "easeOut" }}
-              className="block font-black leading-none tracking-tight text-white
-                         text-[clamp(3rem,9vw,7.5rem)]"
-            >
-              {line}
-            </motion.span>
-          ))}
+          {/* Subheadline — pinned to bottom on desktop */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55 }}
+            className="font-bold text-white text-[clamp(1rem,2.2vw,1.6rem)]"
+          >
+            Unleash Your Creativity.{" "}
+            <span className="text-[#e91e8c]">Own</span> the Streets
+          </motion.p>
         </div>
 
-        {/* Subheadline — bottom */}
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
-          className="text-white font-semibold text-[clamp(1.1rem,3vw,2rem)]"
-        >
-          Unleash Your Creativity.{" "}
-          <span className="text-[#e91e8c]">Own</span> the Streets
-        </motion.p>
+        {/* ── RIGHT: shoe fills this column completely ─── */}
+        <div className="relative flex items-center justify-center
+                        h-[55vw] lg:h-auto min-h-[380px]">
+
+          {/* Outer ambient glow — large diffuse circle */}
+          <div
+            className="absolute w-[85%] h-[85%] rounded-full pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(255,140,60,0.22) 0%, rgba(200,60,20,0.10) 45%, transparent 70%)",
+              filter: "blur(32px)",
+            }}
+          />
+
+          {/* Orange ring halo */}
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              width: "min(72%, 520px)",
+              height: "min(72%, 520px)",
+              border: "2px solid rgba(255,130,40,0.35)",
+              boxShadow:
+                "0 0 40px rgba(255,130,40,0.20), inset 0 0 40px rgba(255,130,40,0.08)",
+            }}
+          />
+
+          {/* Shoe — floats, fills column */}
+          <motion.div
+            animate={{ y: [0, -16, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="relative w-full h-full"
+            style={{ minHeight: "380px" }}
+          >
+            <Image
+              src="/images/hero-sneaker.png"
+              alt="Custom Jordan sneaker"
+              fill
+              className="object-contain"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              priority
+            />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
