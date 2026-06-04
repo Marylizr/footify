@@ -3,89 +3,64 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const headline = "The Ultimate Sneaker Customization Experience";
-const words = headline.split(" ");
+// Each line of the headline renders as a separate stagger block
+const lines = ["The Ultimate", "Sneaker", "Customization", "Experience"];
 
 export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center bg-[#08080f] overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(ellipse 90% 70% at 65% 50%, rgba(233,30,140,0.12) 0%, rgba(100,60,180,0.14) 35%, #08080f 70%)",
-      }}
+      className="relative w-full h-screen min-h-[600px] bg-[#08080f] overflow-hidden"
     >
-      {/* top-left corner glow */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #f5e642, transparent 70%)" }} />
-      {/* bottom-right accent */}
-      <div className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full opacity-8 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #e91e8c, transparent 65%)" }} />
-      <div className="max-w-7xl mx-auto px-6 py-24 w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Left: text */}
-        <div className="flex flex-col gap-6 z-10">
-          <h1 className="text-5xl md:text-7xl font-black leading-tight">
-            {words.map((word, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className={`inline-block mr-[0.25em] ${
-                  word === "Customization" ? "text-[#e91e8c]" :
-                  word === "Experience"   ? "text-[#f5e642]" : "text-white"
-                }`}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: words.length * 0.08 + 0.2 }}
-            className="text-[#a0a0b0] text-xl md:text-2xl font-medium"
-          >
-            Unleash Your Creativity. Own the Streets.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: words.length * 0.08 + 0.4 }}
-            className="flex gap-4 flex-wrap"
-          >
-            <a
-              href="#concept"
-              className="bg-[#e91e8c] text-white px-8 py-3 rounded-full font-semibold text-base hover:bg-[#ff2d9b] transition-colors"
+      {/* ── Sneaker: right 65%, fills full height, floats ── */}
+      <motion.div
+        animate={{ y: [0, -14, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute right-0 top-0 w-[65%] md:w-[60%] h-full pointer-events-none"
+      >
+        <Image
+          src="/images/hero-sneaker.png"
+          alt="Custom Jordan sneaker"
+          fill
+          className="object-contain object-right-bottom"
+          priority
+          sizes="65vw"
+        />
+      </motion.div>
+
+      {/* ── Left-to-right gradient so text stays readable ── */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#08080f] via-[#08080f]/80 to-transparent pointer-events-none" />
+      {/* ── Bottom gradient ── */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#08080f]/60 via-transparent to-transparent pointer-events-none" />
+
+      {/* ── Content ── */}
+      <div className="relative z-10 h-full flex flex-col justify-between px-6 md:px-14 lg:px-20 pt-28 pb-10">
+        {/* Headline — each line staggers in from the left */}
+        <div className="flex flex-col">
+          {lines.map((line, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.55, delay: i * 0.1, ease: "easeOut" }}
+              className="block font-black leading-none tracking-tight text-white
+                         text-[clamp(3rem,9vw,7.5rem)]"
             >
-              Explore Now
-            </a>
-            <a
-              href="#features"
-              className="border border-white/20 text-white px-8 py-3 rounded-full font-semibold text-base hover:border-white/50 transition-colors"
-            >
-              Learn More
-            </a>
-          </motion.div>
+              {line}
+            </motion.span>
+          ))}
         </div>
 
-        {/* Right: image */}
-        <div className="flex justify-center items-center">
-          <motion.div
-            animate={{ y: [0, -16, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Image
-              src="/images/hero-sneaker.png"
-              alt="Custom sneaker"
-              width={600}
-              height={600}
-              className="w-full max-w-md md:max-w-full object-contain drop-shadow-2xl"
-              priority
-            />
-          </motion.div>
-        </div>
+        {/* Subheadline — bottom */}
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="text-white font-semibold text-[clamp(1.1rem,3vw,2rem)]"
+        >
+          Unleash Your Creativity.{" "}
+          <span className="text-[#e91e8c]">Own</span> the Streets
+        </motion.p>
       </div>
     </section>
   );
