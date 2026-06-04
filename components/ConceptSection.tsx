@@ -6,28 +6,23 @@ import Image from "next/image";
 
 export default function ConceptSection() {
   const shoeRef  = useRef(null);
-  const inView   = useInView(shoeRef, { once: true, margin: "-80px" });
+  const inView   = useInView(shoeRef, { once: true, margin: "-60px" });
   const controls = useAnimation();
 
   useEffect(() => {
     if (!inView) return;
-
-    // ① Shoe slides up into the scene
+    // ① Slide shoe up into the scene from below
     controls
       .start({
         opacity: 1,
         y: 0,
         transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
       })
-      // ② Once revealed, chain into infinite gentle float
+      // ② Chain into infinite gentle float
       .then(() => {
         controls.start({
           y: [0, -20, 0],
-          transition: {
-            duration: 3.8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          },
+          transition: { duration: 3.8, repeat: Infinity, ease: "easeInOut" },
         });
       });
   }, [inView, controls]);
@@ -36,68 +31,70 @@ export default function ConceptSection() {
     <section id="concept" className="bg-[#d0d0e8]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[680px]">
 
-        {/* ══════════════════════════════════════════════
-            LEFT — Small purple card + shoe overflowing it
-            ══════════════════════════════════════════════ */}
-        <div className="relative flex items-center justify-center overflow-visible
-                        min-h-[580px] md:min-h-0 py-10 md:py-0">
+        {/* ══════════════════════════════════════════════════════
+            LEFT — Purple card with heading ON TOP, shoe overflows
+            ══════════════════════════════════════════════════════ */}
+        <div className="flex flex-col justify-start overflow-visible py-8 px-4 md:px-6">
 
-          {/* Purple card — starts at 28% from top so shoe overflows above.
-              Only covers the lower ~72% of the column height.            */}
+          {/*
+            The card wraps heading + shoe in a normal FLEX-COLUMN flow.
+            overflow: visible lets the shoe bleed outside the card bounds.
+            The heading is always FIRST in DOM → always above the shoe.
+          */}
           <div
-            className="absolute bg-[#3d3d8f] rounded-3xl overflow-hidden"
-            style={{ top: "27%", bottom: 0, left: "5%", right: "5%" }}
+            className="relative bg-[#3d3d8f] rounded-3xl flex flex-col overflow-visible"
           >
-            {/* Subtle inner glow */}
+            {/* Inner glow */}
             <div
-              className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full pointer-events-none"
+              className="absolute -bottom-10 -left-10 w-56 h-56 rounded-full pointer-events-none"
               style={{
-                background:
-                  "radial-gradient(circle, rgba(100,100,220,0.35), transparent 70%)",
-                filter: "blur(30px)",
+                background: "radial-gradient(circle, rgba(100,100,220,0.3), transparent 70%)",
+                filter: "blur(28px)",
               }}
             />
-            {/* Heading — always visible at the top of the card */}
-            <div className="relative z-10 p-7 md:p-9">
+
+            {/* ── HEADING — always on top in DOM, stays visible ── */}
+            <div className="relative z-20 px-7 pt-8 pb-4 md:px-9 md:pt-10">
               <h2
                 className="text-white font-black leading-[1.1]
-                           text-[clamp(1.7rem,2.8vw,2.8rem)]"
+                           text-[clamp(1.8rem,3vw,2.8rem)]"
               >
                 The Concept
                 <br />
                 Behind Footify
               </h2>
             </div>
-          </div>
 
-          {/* ── Jordan shoe ─────────────────────────────
-              z-10 → in front of the card.
-              Width 90% → larger than the 88%-wide card so it sticks out
-              on both sides and above.
-              initial y:140 so it enters from below the card.          */}
-          <motion.div
-            ref={shoeRef}
-            initial={{ opacity: 0, y: 140 }}
-            animate={controls}
-            className="relative z-10 w-[90%] max-w-[460px] pointer-events-none"
-          >
-            <Image
-              src="/images/concept-sneaker.png"
-              alt="Jordan sneaker – no background"
-              width={680}
-              height={680}
-              className="w-full h-auto object-contain"
-              style={{
-                filter:
-                  "drop-shadow(0 28px 40px rgba(0,0,0,0.55))",
-              }}
-              priority
-            />
-          </motion.div>
+            {/* ── SHOE — below heading in DOM, z-10 ──
+                negative marginBottom makes the shoe overflow the card bottom.
+                The scroll-reveal starts from y:120 (below card).           */}
+            <div className="relative z-10 flex justify-center overflow-visible px-4">
+              <motion.div
+                ref={shoeRef}
+                initial={{ opacity: 0, y: 120 }}
+                animate={controls}
+                className="w-full max-w-[460px]"
+                style={{ marginBottom: "-14%" }}
+                /* shoe overflows card bottom */
+              >
+                <Image
+                  src="/images/concept-sneaker.png"
+                  alt="Jordan sneaker"
+                  width={680}
+                  height={680}
+                  className="w-full h-auto object-contain"
+                  style={{
+                    filter: "drop-shadow(0 28px 40px rgba(0,0,0,0.6))",
+                  }}
+                  priority
+                />
+              </motion.div>
+            </div>
+          </div>
         </div>
 
         {/* ══════════════════════════════════════════════
-            RIGHT — Brand copy, feature cards, CTA
+            RIGHT — brand copy, feature cards, CTA
             ══════════════════════════════════════════════ */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
@@ -108,62 +105,48 @@ export default function ConceptSection() {
                      p-8 md:p-10 lg:p-14"
         >
           <p className="text-[#2a2a4a] text-base md:text-lg leading-relaxed">
-            Footify isn&apos;t just a sneaker customization platform—it&apos;s a
-            movement for creators, trendsetters, and sneakerheads who want to
-            break the mold. Here, your shoes become your canvas, and your style
-            becomes the masterpiece.
+            Footify isn&apos;t just a sneaker customization platform—it&apos;s a movement
+            for creators, trendsetters, and sneakerheads who want to break the mold.
+            Here, your shoes become your canvas, and your style becomes the masterpiece.
           </p>
 
           <p className="text-[#2a2a4a] text-base md:text-lg leading-relaxed">
-            Whether you&apos;re a basketball player, street artist, or fashion
-            enthusiast, Footify lets you personalize your Nike Jordans like
-            never before.
+            Whether you&apos;re a basketball player, street artist, or fashion enthusiast,
+            Footify lets you personalize your Nike Jordans like never before.
           </p>
 
           <p className="text-[#2a2a4a] font-black text-lg md:text-xl leading-snug">
-            Unique Designs — Vibrant colors,
-            <br />
+            Unique Designs — Vibrant colors,<br />
             textures, and custom prints.
           </p>
 
           {/* Feature cards */}
           <div className="grid grid-cols-2 gap-4">
             {[
-              {
-                title: "Cutting-Edge Tech",
-                desc: "Advanced digital mockups for seamless customization.",
-              },
-              {
-                title: "One-of-a-Kind",
-                desc: "Sneakers – No limits, no rules. Just pure self-expression.",
-              },
+              { title: "Cutting-Edge Tech",   desc: "Advanced digital mockups for seamless customization." },
+              { title: "One-of-a-Kind",        desc: "Sneakers – No limits, no rules. Just pure self-expression." },
             ].map((card) => (
               <div
                 key={card.title}
                 className="bg-white/60 border border-white/70 rounded-2xl p-5"
               >
-                <h3 className="font-bold text-[#3d3d8f] text-base mb-2">
-                  {card.title}
-                </h3>
-                <p className="text-[#444466] text-sm leading-relaxed">
-                  {card.desc}
-                </p>
+                <h3 className="font-bold text-[#3d3d8f] text-base mb-2">{card.title}</h3>
+                <p className="text-[#444466] text-sm leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
 
-          {/* CTA */}
           <motion.a
             href="#cta"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-block bg-[#3d3d8f] hover:bg-[#4a4ab5]
-                       transition-colors text-white px-10 py-4 rounded-xl
-                       font-bold text-lg w-fit cursor-pointer"
+            className="inline-block bg-[#3d3d8f] hover:bg-[#4a4ab5] transition-colors
+                       text-white px-10 py-4 rounded-xl font-bold text-lg w-fit cursor-pointer"
           >
             Try now!
           </motion.a>
         </motion.div>
+
       </div>
     </section>
   );
