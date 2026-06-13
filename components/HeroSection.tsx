@@ -1,93 +1,58 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
-
-const lines = ["The Ultimate", "Sneaker", "Customization", "Experience"];
+import heroShoe from "../img/shoe-1.png";
 
 export default function HeroSection() {
   return (
     <section
-      id="hero"
-      className="relative w-full min-h-screen bg-[#08080f] overflow-hidden"
+      id="design"
+      className="relative min-h-screen overflow-hidden bg-[#050712] pt-28 md:pt-32"
     >
-      {/* ═══ TRUE 50/50 GRID — text left, shoe right ═══ */}
-      <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,215,255,0.12),transparent_30%),radial-gradient(circle_at_82%_38%,rgba(255,43,191,0.13),transparent_28%),linear-gradient(180deg,#050712_0%,#090b16_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,18,0.96)_0%,rgba(5,7,18,0.78)_45%,rgba(5,7,18,0.26)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(0,215,255,0.12),transparent_30%),linear-gradient(180deg,rgba(5,7,18,0.15)_0%,rgba(5,7,18,0.72)_100%)]" />
 
-        {/* ── LEFT: headline + subheadline ───────────── */}
-        <div className="relative z-10 flex flex-col justify-between
-                        px-6 md:px-12 lg:px-16 xl:px-20
-                        pt-28 pb-10 min-h-screen lg:min-h-0">
-          {/* Staggered headline */}
-          <div className="flex flex-col mt-4">
-            {lines.map((line, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-                className="block font-black text-white leading-[0.95] tracking-tight
-                           text-[clamp(3.5rem,8vw,7.5rem)]"
-              >
-                {line}
-              </motion.span>
-            ))}
+      <div className="relative z-10 mx-auto grid min-h-[calc(100vh-8rem)] max-w-[1280px] items-center gap-10 px-6 pb-16 lg:grid-cols-[0.74fr_1.26fr] lg:gap-4">
+        <div className="relative z-10 max-w-xl text-center lg:text-left">
+          <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-[#c9d0e8] backdrop-blur-sm">
+            Design. Create. Wear.
+          </span>
+
+          <h1 className="mt-6 text-balance text-[clamp(3rem,5.2vw,5.65rem)] font-black leading-[0.94] tracking-[-0.05em] text-white">
+            The Ultimate Sneaker Customization Experience
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-pretty text-base leading-8 text-[#c9d0e8] md:text-lg">
+            Design. Personalize. Stand Out. Create sneakers that are 100% you.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+            <a
+              href="#customize"
+              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#050712] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#f2f5ff]"
+            >
+              Design Yours
+            </a>
+            <a
+              href="#collections"
+              className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:border-white/20 hover:bg-white/10"
+            >
+              Explore Gallery
+            </a>
           </div>
 
-          {/* Subheadline — pinned to bottom on desktop */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.55 }}
-            className="font-bold text-white text-[clamp(1rem,2.2vw,1.6rem)]"
-          >
-            Unleash Your Creativity.{" "}
-            <span className="text-[#e91e8c]">Own</span> the Streets
-          </motion.p>
+          <p className="mt-6 text-sm text-[#8f98b8]">
+            Built for creators who want custom sneakers with a premium neon streetwear feel.
+          </p>
         </div>
 
-        {/* ── RIGHT: shoe fills this column completely ─── */}
-        <div className="relative flex items-center justify-center
-                        h-[55vw] lg:h-auto min-h-[380px]">
-
-          {/* Outer ambient glow — large diffuse circle */}
-          <div
-            className="absolute w-[85%] h-[85%] rounded-full pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(255,140,60,0.22) 0%, rgba(200,60,20,0.10) 45%, transparent 70%)",
-              filter: "blur(32px)",
-            }}
+        <div className="relative mx-auto w-full max-w-[820px] lg:max-w-[900px]">
+          <Image
+            src={heroShoe}
+            alt="Premium custom sneaker concept"
+            priority
+            sizes="(min-width: 1024px) 62vw, 100vw"
+            className="h-auto w-full object-contain"
           />
-
-          {/* Orange ring halo */}
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: "min(72%, 520px)",
-              height: "min(72%, 520px)",
-              border: "2px solid rgba(255,130,40,0.35)",
-              boxShadow:
-                "0 0 40px rgba(255,130,40,0.20), inset 0 0 40px rgba(255,130,40,0.08)",
-            }}
-          />
-
-          {/* Shoe — floats, fills column */}
-          <motion.div
-            animate={{ y: [0, -16, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-full h-full"
-            style={{ minHeight: "380px" }}
-          >
-            <Image
-              src="/images/hero-sneaker.png"
-              alt="Custom Jordan sneaker"
-              fill
-              className="object-contain"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              priority
-            />
-          </motion.div>
         </div>
       </div>
     </section>

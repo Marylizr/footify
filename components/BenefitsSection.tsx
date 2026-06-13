@@ -1,69 +1,38 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Image from "next/image";
-
 const benefits = [
   {
-    title: "Handcrafted Precision & Premium Materials",
-    description:
-      "Our artisans ensure high-quality finishes, premium paints, and durable coatings so your kicks stay fresh on and off the court.",
+    title: "Custom Designs",
+    description: "Tailor every pair into your own sneaker art story.",
   },
   {
-    title: "Limited Edition Drops & Collabs",
-    description:
-      "Exclusive Footify x Street Artists collabs—designed by the world's best urban creatives.",
+    title: "Premium Finish",
+    description: "Clean materials, rich detail, and polished presentation.",
   },
   {
-    title: "Global Shipping & Sneaker Community",
-    description:
-      "Ship your custom Jordans anywhere & connect with other sneaker lovers in the Footify community.",
+    title: "Fast Delivery",
+    description: "A smooth handoff from concept to your doorstep.",
+  },
+  {
+    title: "Secure Checkout",
+    description: "Simple, trusted ordering with clear purchase flow.",
   },
 ];
 
 export default function BenefitsSection() {
   return (
-    <section id="benefits" className="bg-white">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[580px]">
-
-        {/* ── LEFT: white bg, pink titles ─────────────── */}
-        <div className="flex flex-col justify-center p-8 md:p-12 lg:p-16 gap-10">
-          {benefits.map((b, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: i * 0.15 }}
-              viewport={{ once: true, margin: "-80px" }}
+    <section className="bg-[#080b18] px-6 py-12 md:py-16">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {benefits.map((benefit) => (
+            <div
+              key={benefit.title}
+              className="group rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.05)] p-6 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:border-white/20"
             >
-              <h3 className="font-black text-[#e91e8c] leading-snug mb-2
-                             text-[clamp(1.25rem,2.5vw,1.9rem)]">
-                {b.title}
-              </h3>
-              <p className="text-[#333] text-sm md:text-base leading-relaxed">
-                {b.description}
-              </p>
-            </motion.div>
+              <div className="mb-4 h-2 w-12 rounded-full bg-[linear-gradient(90deg,#178bff,#00d7ff,#ff2bbf)]" />
+              <h3 className="text-lg font-semibold text-white">{benefit.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-[#c9d0e8]">{benefit.description}</p>
+            </div>
           ))}
         </div>
-
-        {/* ── RIGHT: player image fills column ─────────── */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.65 }}
-          viewport={{ once: true }}
-          className="relative min-h-[400px] md:min-h-0"
-        >
-          <Image
-            src="/images/player.png"
-            alt="Basketball player with paint splash"
-            fill
-            className="object-cover object-center"
-            sizes="50vw"
-          />
-        </motion.div>
-
       </div>
     </section>
   );

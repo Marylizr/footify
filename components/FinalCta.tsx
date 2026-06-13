@@ -1,74 +1,29 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Image from "next/image";
-
 export default function FinalCta() {
   return (
-    <section
-      id="cta"
-      className="relative w-full overflow-hidden"
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[500px] md:min-h-[560px]">
+    <section id="contact" className="bg-[#050712] px-6 py-[88px]">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="relative overflow-hidden rounded-[2.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(8,11,24,0.98),rgba(11,16,40,0.98))] px-6 py-12 text-center shadow-[0_30px_100px_rgba(0,0,0,0.42)] md:px-10 md:py-16">
+          <div className="absolute left-1/2 top-0 h-48 w-48 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(0,215,255,0.22),transparent_70%)] blur-2xl" />
+          <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(255,43,191,0.18),transparent_70%)] blur-3xl" />
 
-        {/* ── LEFT: sneaker fills the entire column ─── */}
-        <div className="relative min-h-[380px] md:min-h-0 order-2 md:order-1">
-          <Image
-            src="/images/cta-sneaker.png"
-            alt="Get started sneaker"
-            fill
-            className="object-cover object-center"
-            sizes="50vw"
-          />
+          <div className="relative mx-auto max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#00d7ff]">
+              Final Step
+            </p>
+            <h2 className="mt-4 text-[clamp(2.4rem,5vw,4.8rem)] font-black leading-[0.96] tracking-[-0.04em] text-white">
+              Ready to bring your vision to life?
+            </h2>
+            <p className="mt-5 text-base leading-8 text-[#c9d0e8] md:text-lg">
+              Start customizing and step into a pair made for your story.
+            </p>
+            <a
+              href="#design"
+              className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-[#050712] transition-transform hover:-translate-y-0.5"
+            >
+              Start Your Custom
+            </a>
+          </div>
         </div>
-
-        {/* ── RIGHT: deep navy-blue gradient ───────── */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.65 }}
-          viewport={{ once: true }}
-          className="relative flex flex-col justify-center
-                     px-10 py-14 md:px-14 lg:px-20
-                     order-1 md:order-2"
-          style={{
-            background:
-              "linear-gradient(135deg, #12103a 0%, #0d1b52 55%, #0a1640 100%)",
-          }}
-        >
-          {/* Subtle top-right glow */}
-          <div
-            className="absolute top-0 right-0 w-72 h-72 rounded-full
-                       opacity-20 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(circle, #4040cc 0%, transparent 70%)",
-            }}
-          />
-
-          {/* Heading — 3 lines as in screenshot */}
-          <h2
-            className="relative z-10 font-black leading-tight text-white/90
-                       text-[clamp(2.6rem,5.5vw,5rem)]"
-          >
-            Get Started &amp;<br />
-            Unleash Your<br />
-            Style
-          </h2>
-
-          {/* Pink CTA button — rounded-lg, not pill */}
-          <motion.a
-            href="#hero"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="relative z-10 mt-10 inline-block
-                       bg-[#e91e8c] hover:bg-[#ff2d9b] transition-colors
-                       text-white font-semibold text-xl
-                       px-10 py-4 rounded-lg w-fit cursor-pointer"
-          >
-            Try now!
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );

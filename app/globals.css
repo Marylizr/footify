@@ -3,18 +3,56 @@
 @tailwind utilities;
 
 :root {
-  --background: #08080f;
+  --background: #050712;
   --foreground: #ffffff;
+  --muted: #c9d0e8;
+  --border: rgba(255, 255, 255, 0.12);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  background: #050712;
 }
 
 body {
-  background: #08080f;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(23, 139, 255, 0.15), transparent 32%),
+    radial-gradient(circle at top right, rgba(255, 43, 191, 0.12), transparent 30%),
+    linear-gradient(180deg, #050712 0%, #080b16 45%, #050712 100%);
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(0, 215, 255, 0.28);
+  color: #ffffff;
 }
 
 @layer utilities {

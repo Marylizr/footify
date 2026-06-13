@@ -1,75 +1,46 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Image from "next/image";
-
-const features = [
+const steps = [
   {
-    title: "360° Sneaker Customization",
-    body: "Design your Jordans in real-time with our interactive 3D editor. Choose materials, colors, laces, patterns, and even add your own graffiti or digital artwork.",
+    number: "01",
+    title: "Choose your base",
+    body: "Start with the silhouette that fits your style and the story you want to tell.",
   },
   {
-    title: "AI-Generated Concepts",
-    body: "Need inspiration? Our AI-powered sneaker designer creates unique, street-ready looks based on your preferences and mood.",
+    number: "02",
+    title: "Customize your look",
+    body: "Tune colors, materials and accents until the design feels complete.",
+  },
+  {
+    number: "03",
+    title: "Wear your masterpiece",
+    body: "Lock in the build and step into a pair made for your own lane.",
   },
 ];
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="relative w-full">
+    <section className="bg-[#080b18] px-6 py-[88px]">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#00d7ff]">
+            How It Works
+          </p>
+          <h2 className="mt-4 text-[clamp(2.2rem,4.8vw,4.2rem)] font-black leading-[0.96] tracking-[-0.04em] text-white">
+            Three steps to your next favorite pair.
+          </h2>
+        </div>
 
-      {/*
-        Container is exactly viewport height so the section never overflows.
-        Background is a warm red gradient that MATCHES the image's own red bg,
-        so the object-contain letterbox areas blend seamlessly.
-      */}
-      <div
-        className="relative w-full h-screen"
-        style={{
-          background:
-            "linear-gradient(150deg, #7a0e00 0%, #b81a00 30%, #cc2200 55%, #8b0800 85%, #550500 100%)",
-        }}
-      >
-        {/* Shoe image — object-contain preserves full image, no cropping.
-            Letterbox areas filled by the matching red gradient above.    */}
-        <Image
-          src="/images/features-sneaker.png"
-          alt="Colorful Jordan sneaker on vibrant red background"
-          fill
-          className="object-contain"
-          sizes="100vw"
-          priority
-        />
-
-        {/* Extra darkening on the left so white text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent pointer-events-none" />
-        {/* Subtle top vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent pointer-events-none" />
-
-        {/* ── Feature text — upper-left overlay ── */}
-        <div
-          className="absolute inset-0 flex flex-col justify-start
-                      p-6 md:p-12 lg:p-16 pt-12 md:pt-16 lg:pt-20"
-        >
-          {features.map((f, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              viewport={{ once: true }}
-              className="mb-8 md:mb-12 max-w-[min(440px,48vw)]"
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {steps.map((step) => (
+            <article
+              key={step.number}
+              className="rounded-[1.75rem] border border-white/10 bg-[rgba(255,255,255,0.05)] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.2)] transition-transform duration-300 hover:-translate-y-1"
             >
-              <h3
-                className="text-white font-black leading-tight mb-3
-                           text-[clamp(1.2rem,2.4vw,2rem)]"
-              >
-                {f.title}
-              </h3>
-              <p className="text-white/85 leading-relaxed text-[clamp(0.85rem,1.4vw,1.05rem)]">
-                {f.body}
-              </p>
-            </motion.div>
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(135deg,#178bff,#00d7ff,#ff2bbf)] text-sm font-black text-white">
+                {step.number}
+              </div>
+              <h3 className="mt-5 text-xl font-semibold text-white">{step.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-[#c9d0e8]">{step.body}</p>
+            </article>
           ))}
         </div>
       </div>
