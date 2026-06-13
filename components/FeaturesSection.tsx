@@ -17,26 +17,40 @@ const features = [
 export default function FeaturesSection() {
   return (
     <section id="features" className="relative w-full">
-      {/* ── Natural-height wrapper: image drives the section height ── */}
-      <div className="relative w-full">
 
-        {/* Image at FULL natural dimensions — never cropped */}
+      {/*
+        Container is exactly viewport height so the section never overflows.
+        Background is a warm red gradient that MATCHES the image's own red bg,
+        so the object-contain letterbox areas blend seamlessly.
+      */}
+      <div
+        className="relative w-full h-screen"
+        style={{
+          background:
+            "linear-gradient(150deg, #7a0e00 0%, #b81a00 30%, #cc2200 55%, #8b0800 85%, #550500 100%)",
+        }}
+      >
+        {/* Shoe image — object-contain preserves full image, no cropping.
+            Letterbox areas filled by the matching red gradient above.    */}
         <Image
           src="/images/features-sneaker.png"
-          alt="Colorful Jordan sneaker"
-          width={1024}
-          height={1024}
-          className="w-full h-auto block"
+          alt="Colorful Jordan sneaker on vibrant red background"
+          fill
+          className="object-contain"
           sizes="100vw"
+          priority
         />
 
-        {/* Dark left gradient so white text is readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/40 pointer-events-none" />
+        {/* Extra darkening on the left so white text stays readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent pointer-events-none" />
+        {/* Subtle top vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent pointer-events-none" />
 
-        {/* ── Text overlay — top-left ── */}
-        <div className="absolute inset-0 flex flex-col justify-start
-                        p-6 md:p-12 lg:p-16 pt-10 md:pt-16">
+        {/* ── Feature text — upper-left overlay ── */}
+        <div
+          className="absolute inset-0 flex flex-col justify-start
+                      p-6 md:p-12 lg:p-16 pt-12 md:pt-16 lg:pt-20"
+        >
           {features.map((f, i) => (
             <motion.div
               key={i}
@@ -44,13 +58,15 @@ export default function FeaturesSection() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
               viewport={{ once: true }}
-              className="mb-8 md:mb-12 max-w-[min(460px,50vw)]"
+              className="mb-8 md:mb-12 max-w-[min(440px,48vw)]"
             >
-              <h3 className="text-white font-black text-xl md:text-3xl lg:text-4xl
-                             mb-3 leading-tight">
+              <h3
+                className="text-white font-black leading-tight mb-3
+                           text-[clamp(1.2rem,2.4vw,2rem)]"
+              >
                 {f.title}
               </h3>
-              <p className="text-white/85 text-sm md:text-base lg:text-lg leading-relaxed">
+              <p className="text-white/85 leading-relaxed text-[clamp(0.85rem,1.4vw,1.05rem)]">
                 {f.body}
               </p>
             </motion.div>
