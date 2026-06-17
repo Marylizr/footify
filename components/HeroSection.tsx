@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,18,0.96)_0%,rgba(5,7,18,0.68)_50%,rgba(5,7,18,0.12)_100%)] lg:bg-[linear-gradient(90deg,rgba(5,7,18,0.96)_0%,rgba(5,7,18,0.78)_45%,rgba(5,7,18,0.26)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(0,215,255,0.1),transparent_30%),linear-gradient(180deg,rgba(5,7,18,0)_0%,rgba(5,7,18,0.74)_100%)]" />
 
-      <div className="relative z-10 mx-auto grid min-h-[530px] max-w-[1280px] items-start px-5 pb-4 pt-4 md:min-h-[calc(100vh-8rem)] md:items-center md:px-6 md:pb-16 md:pt-0 lg:grid-cols-[0.74fr_1.26fr] lg:gap-4">
+      <div className="relative z-10 mx-auto grid min-h-[350px] max-w-[1280px] items-start px-5 pb-4 pt-4 md:min-h-[calc(100vh-8rem)] md:items-center md:px-6 md:pb-16 md:pt-0 lg:grid-cols-[0.74fr_1.26fr] lg:gap-4">
         <div className="relative z-20 max-w-[68vw] text-left sm:max-w-[22rem] md:max-w-xl lg:max-w-xl">
           <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.55rem] font-semibold uppercase tracking-[0.2em] text-[#c9d0e8] backdrop-blur-sm md:px-4 md:py-2 md:text-xs md:tracking-[0.32em]">
             Design. Create. Wear.
