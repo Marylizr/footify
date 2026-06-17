@@ -29,22 +29,22 @@ const galleryItems = [
 
 export default function GallerySection() {
   return (
-    <section id="collections" className="bg-[#050712] px-6 py-[88px]">
+    <section id="collections" className="bg-[#050712] px-4 py-12 md:px-6 md:py-14 lg:py-[88px]">
       <div className="mx-auto max-w-[1200px]">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#ff2bbf]">
             Gallery
           </p>
-          <h2 className="mt-4 text-[clamp(2.2rem,4.8vw,4.1rem)] font-black leading-[0.96] tracking-[-0.04em] text-white">
+          <h2 className="mt-4 text-[clamp(2rem,7vw,3.4rem)] font-black leading-[0.98] tracking-[-0.03em] text-white lg:text-[clamp(2.6rem,4.8vw,4.1rem)]">
             Explore the latest sneaker concepts.
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 xl:grid-cols-4">
           {galleryItems.map((item) => (
             <article
               key={item.title}
-              className="group overflow-hidden rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.045)] p-2 shadow-[0_20px_70px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-[rgba(255,255,255,0.065)]"
+              className="group overflow-hidden rounded-[1.25rem] border border-white/10 bg-[rgba(255,255,255,0.045)] p-2 shadow-[0_20px_70px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-[rgba(255,255,255,0.065)] lg:rounded-[1.5rem]"
             >
               <div className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] bg-[radial-gradient(circle_at_50%_35%,rgba(23,139,255,0.18),#0b1028_68%)]">
                 <Image
