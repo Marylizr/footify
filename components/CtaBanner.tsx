@@ -1,4 +1,6 @@
-import Image from "next/image";
+import SneakerReel from "./reel/SneakerReel";
+import sneakerCutout from "./reel/sneaker-cutout.webp";
+import sneakerPhoto from "./reel/sneaker-photo.png";
 
 export default function CtaBanner() {
   return (
@@ -18,7 +20,7 @@ export default function CtaBanner() {
             </p>
             <a
               href="#contact"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#071022] transition-transform hover:-translate-y-0.5"
+              className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-white px-8 text-base font-bold text-[#071022] transition-transform hover:-translate-y-0.5"
             >
               Start Designing
             </a>
@@ -26,14 +28,16 @@ export default function CtaBanner() {
 
           <div className="relative mx-auto w-full max-w-[700px]">
             <div className="absolute inset-6 -z-10 rounded-[2rem] bg-white/20 blur-3xl" />
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[1.2rem] border border-white/20 bg-[#f7f8ff] md:aspect-[2.2/1] lg:aspect-[1.5/1] lg:rounded-[1.75rem]">
-              <Image
-                src="/images/banner-sneaker.png"
-                alt="Colorful signature sneaker concept"
-                fill
-                sizes="(min-width: 1024px) 42vw, 100vw"
-                className="object-contain p-1 md:p-2 lg:scale-[1.08]"
-                priority
+            <div className="relative overflow-hidden rounded-[1.2rem] border border-white/20 bg-[#050506] lg:rounded-[1.75rem]">
+              <SneakerReel
+                photoSrc={sneakerPhoto.src}
+                cutoutSrc={sneakerCutout.src}
+                className="w-full rounded-none border-0 shadow-none"
+                durationSec={6.5}
+                cutoutScale={0.98}
+                offsetX={-1}
+                offsetY={-6}
+                filmFrame
               />
             </div>
           </div>

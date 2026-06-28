@@ -18,7 +18,7 @@ export default function FinalCta() {
             </p>
             <a
               href="#design"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-[#050712] transition-transform hover:-translate-y-0.5"
+              className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-white px-9 text-base font-bold text-[#050712] transition-transform hover:-translate-y-0.5"
             >
               Start Your Custom
             </a>

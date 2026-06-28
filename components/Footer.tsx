@@ -33,7 +33,7 @@ export default function Footer() {
           </p>
           <a
             href="#design"
-            className="mt-7 inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-white/20 hover:bg-white/10"
+            className="mt-7 inline-flex h-12 items-center justify-center rounded-full border border-white/12 bg-white/5 px-7 text-sm font-bold text-white transition-colors hover:border-white/20 hover:bg-white/10"
           >
             Back to top
           </a>

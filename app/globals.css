@@ -61,6 +61,82 @@ a {
   }
 }
 
+.benefit-color-line {
+  position: relative;
+  height: 0.5rem;
+  width: 4.5rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.benefit-color-line::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left center;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #178bff 0%, #00d7ff 50%, #ff2bbf 100%);
+  animation: paint-benefit-line 2.4s ease-in-out var(--line-delay, 0s) infinite;
+}
+
+.benefit-color-line::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: sweep-benefit-line 2.4s ease-in-out var(--line-delay, 0s) infinite;
+}
+
+@keyframes paint-benefit-line {
+  0%,
+  12% {
+    transform: scaleX(0);
+  }
+
+  62%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes sweep-benefit-line {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  58% {
+    opacity: 0.85;
+  }
+
+  78%,
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benefit-color-line::before,
+  .benefit-color-line::after {
+    animation: none;
+  }
+
+  .benefit-color-line::before {
+    transform: scaleX(1);
+  }
+
+  .benefit-color-line::after {
+    display: none;
+  }
+}
+
 @media (max-width: 1279px) {
   header nav {
     display: none !important;
@@ -128,9 +204,9 @@ a {
   }
 
   .hero-inner {
-    min-height: calc(100svh - 4rem) !important;
+    min-height: min(560px, calc(100svh - 4rem)) !important;
     padding-top: 1rem !important;
-    padding-bottom: 1.25rem !important;
+    padding-bottom: 0.75rem !important;
   }
 
   .hero-title {
@@ -187,5 +263,54 @@ a {
 
   .concept-visual {
     display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-section {
+    padding-top: 4rem !important;
+  }
+
+  .hero-inner {
+    min-height: auto !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .hero-title {
+    max-width: 14rem !important;
+    font-size: clamp(1.55rem, 7.2vw, 2rem) !important;
+    line-height: 0.95 !important;
+  }
+
+  .hero-copy {
+    max-width: 11.75rem !important;
+    margin-top: 0.75rem !important;
+    font-size: 0.72rem !important;
+    line-height: 1.15rem !important;
+  }
+
+  .hero-actions {
+    margin-top: 4.5rem !important;
+    width: calc(100vw - 2.5rem) !important;
+    max-width: 23rem !important;
+    gap: 0.6rem !important;
+    justify-content: center !important;
+  }
+
+  .hero-actions a {
+    height: 3rem !important;
+    min-width: 7.35rem !important;
+    padding: 0 1rem !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+  }
+
+  .hero-footnote {
+    display: none !important;
+  }
+
+  .benefits-section {
+    padding-top: 1.25rem !important;
   }
 }

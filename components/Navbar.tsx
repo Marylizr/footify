@@ -43,7 +43,7 @@ export default function Navbar() {
           ))}
           <a
             href="#contact"
-            className="rounded-full border border-white/10 bg-white px-5 py-2 text-sm font-semibold text-[#050712] transition-transform hover:-translate-y-0.5"
+            className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 bg-white px-7 text-sm font-bold text-[#050712] transition-transform hover:-translate-y-0.5"
           >
             Start Now
           </a>
@@ -73,7 +73,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="mt-2 inline-flex w-full items-center justify-center rounded-full border border-white/10 bg-white px-5 py-3 text-sm font-semibold text-[#050712]"
+            className="mt-2 inline-flex h-12 w-full items-center justify-center rounded-full border border-white/10 bg-white px-5 text-sm font-bold text-[#050712]"
           >
             Start Now
           </a>
